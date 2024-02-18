@@ -12,5 +12,8 @@
 4. Edit content at `/src/content.ts` (reflect it at `/public/build/content.js`)
 5. Edit background at `/src/background.ts` (reflect it at `/public/build/background.js`)
 
+## Typescript Support
+use `<script lang="ts">` to use typescript in svelte
+
 ## MIT License
 You are free to use this for your commercial projects!
