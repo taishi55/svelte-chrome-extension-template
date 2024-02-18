@@ -86,7 +86,7 @@ export default [
 		input: "src/content/content.css",
 		output: {
 			sourcemap: false,
-			file: "public/build/content.css",
+			file: "public/build/_content.css",
 		},
 		plugins: [
 			postcss({
@@ -125,7 +125,7 @@ export default [
 			}),
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
-			css({ output: "bundle.css" }),
+			css({ output: "_bundle.css" }),
 
 			// If you have external dependencies installed from
 			// npm, you'll most likely need these plugins. In
@@ -154,7 +154,8 @@ export default [
 			// instead of npm run dev), minify
 			production && terser(),
 			copyFilePlugin('src/manifest.json', 'public/manifest.json'),
-			copyFilePlugin('src/icons', 'public/icons')
+			copyFilePlugin('src/icons', 'public/icons'),
+			copyFilePlugin('src/_locales', 'public/_locales')
 		],
 		watch: {
 			clearScreen: false,

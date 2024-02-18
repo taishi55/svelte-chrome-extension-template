@@ -4,6 +4,7 @@ export default {
   content: [
     "./src/**/*.html", // Scan all HTML files in the "src" directory
     "./src/**/*.svelte", // Scan all Svelte files in the "src" directory
+    "./src/**/*.{html,js,jsx,ts,tsx}",
     // Add any other file types or paths that contain Tailwind CSS classes
   ],
   darkMode: "class",

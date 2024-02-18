@@ -2,4 +2,8 @@
   import "./tailwind.css";
 </script>
 
-<div>Hello</div>
+<svelte:head>
+  <link rel="stylesheet" href="/build/_bundle.css" />
+</svelte:head>
+
+<div class="text-red-500">Hello</div>

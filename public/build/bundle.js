@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -27,6 +27,9 @@ var app = (function () {
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
+    function append(target, node) {
+        target.appendChild(node);
+    }
     function insert(target, node, anchor) {
         target.insertBefore(node, anchor || null);
     }
@@ -37,6 +40,18 @@ var app = (function () {
     }
     function element(name) {
         return document.createElement(name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else if (node.getAttribute(attribute) !== value)
+            node.setAttribute(attribute, value);
     }
     function children(element) {
         return Array.from(element.childNodes);
@@ -300,6 +315,10 @@ var app = (function () {
     function dispatch_dev(type, detail) {
         document.dispatchEvent(custom_event(type, Object.assign({ version: '3.59.1' }, detail), { bubbles: true }));
     }
+    function append_dev(target, node) {
+        dispatch_dev('SvelteDOMInsert', { target, node });
+        append(target, node);
+    }
     function insert_dev(target, node, anchor) {
         dispatch_dev('SvelteDOMInsert', { target, node, anchor });
         insert(target, node, anchor);
@@ -307,6 +326,13 @@ var app = (function () {
     function detach_dev(node) {
         dispatch_dev('SvelteDOMRemove', { node });
         detach(node);
+    }
+    function attr_dev(node, attribute, value) {
+        attr(node, attribute, value);
+        if (value == null)
+            dispatch_dev('SvelteDOMRemoveAttribute', { node, attribute });
+        else
+            dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
     }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
@@ -339,24 +365,36 @@ var app = (function () {
     const file = "src/App.svelte";
 
     function create_fragment(ctx) {
+    	let link;
+    	let t0;
     	let div;
 
     	const block = {
     		c: function create() {
+    			link = element("link");
+    			t0 = space();
     			div = element("div");
     			div.textContent = "Hello";
-    			add_location(div, file, 3, 0, 54);
+    			attr_dev(link, "rel", "stylesheet");
+    			attr_dev(link, "href", "/build/_bundle.css");
+    			add_location(link, file, 4, 2, 70);
+    			attr_dev(div, "class", "text-red-500");
+    			add_location(div, file, 7, 0, 138);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
+    			append_dev(document.head, link);
+    			insert_dev(target, t0, anchor);
     			insert_dev(target, div, anchor);
     		},
     		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
+    			detach_dev(link);
+    			if (detaching) detach_dev(t0);
     			if (detaching) detach_dev(div);
     		}
     	};

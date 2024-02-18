@@ -17,7 +17,7 @@
     {
       "matches": ["https://*/*"],
       "js": ["build/content.js"],
-      "css": ["build/content.css"],
+      "css": ["build/_content.css"],
       "run_at": "document_idle"
     }
   ],
