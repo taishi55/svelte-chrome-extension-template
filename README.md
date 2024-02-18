@@ -1,4 +1,4 @@
-# Svelte Chrome Extension Template
+# Chrome Extension Template (Svelte + Tailwind)
 
 ## Get started
 1. run `npm i`
@@ -14,6 +14,9 @@
 
 ## Typescript Support
 use `<script lang="ts">` to use typescript in svelte
+
+## Tailwind Support
+Use `<style lang="postcss">` to take full advantage.
 
 ## MIT License
 You are free to use this for your commercial projects!
