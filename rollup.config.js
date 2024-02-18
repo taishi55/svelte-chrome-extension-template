@@ -155,7 +155,8 @@ export default [
 			production && terser(),
 			copyFilePlugin('src/manifest.json', 'public/manifest.json'),
 			copyFilePlugin('src/icons', 'public/icons'),
-			copyFilePlugin('src/_locales', 'public/_locales')
+			copyFilePlugin('src/_locales', 'public/_locales'),
+			copyFilePlugin('src/index.html', 'public/index.html')
 		],
 		watch: {
 			clearScreen: false,
