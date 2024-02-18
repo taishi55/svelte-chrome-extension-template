@@ -86,7 +86,7 @@ export default [
 		input: "src/content/content.css",
 		output: {
 			sourcemap: false,
-			file: "public/build/_content.css",
+			file: "public/build/content.css",
 		},
 		plugins: [
 			postcss({
@@ -125,7 +125,7 @@ export default [
 			}),
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
-			css({ output: "_bundle.css" }),
+			css({ output: "bundle.css" }),
 
 			// If you have external dependencies installed from
 			// npm, you'll most likely need these plugins. In
