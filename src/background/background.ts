@@ -1,6 +1,7 @@
-import Browser from "webextension-polyfill";
+export {};
 
-Browser.action.onClicked.addListener(function (tab) {
-  const mainPage = Browser.runtime.getURL("index.html");
-  Browser.tabs.create({ url: mainPage });
+chrome.action.onClicked.addListener(async function (tab) {
+  const mainPage = chrome.runtime.getURL("index.html");
+  chrome.tabs.create({ url: mainPage });
+  // await chrome.tabs.sendMessage(tab.id, { action: "capture" });
 });
